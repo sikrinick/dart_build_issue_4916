@@ -11,26 +11,32 @@ To generate control sample one may run
 
 ## Issue #1. Root module contains empty or no build.yaml, submodule contains build.yaml
 ```zsh
-./reset.sh && dart run build_runner.sh --workspace -c 1
+./reset.sh && dart run build_runner build --workspace -c 1
 ```
-One may observe changes in package `a`.
+One may observe changes in packages `a`, that has rules specified with `global_options`. There are no changes in module `c`, which contains rules specified with `targets.$default.builders`.
+
+### Result
+Not an issue. Works as expected. Modules have to use `targets.$default.builders` if possible. Lack of API to set `runs_before` was reported.
+
 
 ## Issue #2. Root module contains build.yaml, one submodule contains build.yaml, another does not 
 ```zsh
-./reset.sh && dart run build_runner.sh --workspace -c 2
+./reset.sh && dart run build_runner build --workspace -c 2
 ```
-One may observe changes in package `b`.
+One may observe changes in package `a`, `b`, and `c`.  
+Currently, there is no way to override root `build.yaml` with `global_options`.
+
 
 ## Issue #3. Root module contains build.yaml with targets.$default rules, one submodule contains build.yaml, another does not 
 ```zsh
-./reset.sh && dart run build_runner.sh --workspace -c 3
+./reset.sh && dart run build_runner build --workspace -c 3
 ```
-One may observe changes in package `a`.
+One may observe changes in package `a`, but not related to root `build.yaml` or package's `build.yaml`.
 
 ## Issue #4. Root module ignores runs_before defined for it
 Once running
 ```zsh
-./reset.sh && dart run build_runner.sh -c 2 # Contains runs_before
+./reset.sh && dart run build_runner build -c 2 # Contains runs_before
 ```
 Console will contain
 ```
