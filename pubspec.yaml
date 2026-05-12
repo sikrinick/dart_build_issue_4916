@@ -9,6 +9,7 @@ environment:
 workspace:
   - packages/a
   - packages/b
+  - packages/c
 
 dependencies:
   dart_mappable: 4.8.0

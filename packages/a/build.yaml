@@ -4,7 +4,7 @@ global_options:
       - retrofit_generator
     options:
       renameMethods:
-        fromJson: deserialize
-        toJson: serialize
-        fromMap: fromJson
-        toMap: toJson
+        fromJson: deserialize2
+        toJson: serialize2
+        fromMap: fromJson2
+        toMap: toJson2
