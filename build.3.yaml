@@ -1,0 +1,15 @@
+global_options:
+  dart_mappable_builder:
+    runs_before:
+      - retrofit_generator
+
+targets:
+  $default:
+    builders:
+      dart_mappable_builder:
+        options:
+          renameMethods:
+            fromJson: deserialize
+            toJson: serialize
+            fromMap: fromJson
+            toMap: toJson
